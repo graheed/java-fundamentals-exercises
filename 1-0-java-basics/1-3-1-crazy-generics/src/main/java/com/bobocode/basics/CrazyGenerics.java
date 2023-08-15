@@ -141,6 +141,8 @@ public class CrazyGenerics {
     }
 
 
+
+
     /**
      * {@link CollectionUtil} is an util class that provides various generic helper methods.
      */

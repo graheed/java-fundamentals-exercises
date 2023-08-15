@@ -3,11 +3,8 @@ package com.bobocode.basics;
 import com.bobocode.data.Accounts;
 import com.bobocode.model.Account;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.Mockito;
 
 import java.lang.reflect.Method;
@@ -23,9 +20,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(OrderAnnotation.class)
 class HeterogeneousMaxHolderTest {
-    private HeterogeneousMaxHolder heterogeneousMaxHolder = new HeterogeneousMaxHolder();
+    //private HeterogeneousMaxHolder heterogeneousMaxHolder = new HeterogeneousMaxHolder();
+    private HeterogeneousMaxHolder heterogeneousMaxHolder;
     private HeterogeneousMaxHolder heterogeneousMaxHolderMock = Mockito.spy(HeterogeneousMaxHolder.class);
 
+    @BeforeEach
+    void setUp() {
+        this.heterogeneousMaxHolder = new HeterogeneousMaxHolder();
+
+    }
     @Test
     @Order(1)
     @DisplayName("A class does not declare type parameters")
@@ -118,6 +121,7 @@ class HeterogeneousMaxHolderTest {
         assertThat(typeArgument).isEqualTo("? super T");
     }
 
+
     @Test
     @Order(9)
     @SneakyThrows
@@ -134,8 +138,8 @@ class HeterogeneousMaxHolderTest {
     @SneakyThrows
     @DisplayName("put returns null when current max is null")
     void putReturnsNullWhenCurrentMaxIsNull() {
+        this.heterogeneousMaxHolder = new HeterogeneousMaxHolder();
         var result = callPut(String.class, "I am maximum");
-
         assertThat(result).isNull();
     }
 
